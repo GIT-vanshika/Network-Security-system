@@ -8,8 +8,8 @@ load_dotenv()
 MONGO_DB_URL=os.getenv("MONGO_DB_URL")
 print(MONGO_DB_URL)
 
-import certifi
-ca=certifi.where()
+import certifi #to make secure http connection
+ca=certifi.where() #Cerficate Authority
 
 import pandas as pd
 import numpy as np
