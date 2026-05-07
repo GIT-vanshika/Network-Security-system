@@ -1,10 +1,12 @@
 # Network Security ML Pipeline
 
-This project builds a machine learning pipeline for network security data, focused on phishing URL detection. It extracts phishing/legitimate URL feature data, stores and reads data through MongoDB, creates training artifacts, validates the dataset schema, and checks for dataset drift before the data moves further into model training.
+This project is an end-to-end network security machine learning system for identifying phishing URLs from structured URL-based features. It is designed to handle the complete ML lifecycle, starting from raw data collection and database storage, then moving through data ingestion, validation, transformation, model training, evaluation, prediction, and deployment.
 
-## Project Objective
+## About The Project
 
-The goal is to create an end-to-end, modular ML workflow for detecting suspicious or phishing URLs from structured URL features. The current pipeline prepares reliable train/test data and validates that incoming data matches the expected schema before model development and deployment steps are added.
+The system uses phishing and legitimate website data to learn patterns that help classify whether a URL is safe or suspicious. The project is structured as a production-style ML pipeline, where each stage is separated into components, configuration entities, artifact entities, logging, exception handling, and reusable utilities.
+
+In short, the project aims to make a reliable phishing detection workflow that can collect data, validate data quality, train a machine learning model, and later serve predictions through a deployment-ready pipeline.
 
 ## Current Features
 
