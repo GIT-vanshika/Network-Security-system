@@ -1,0 +1,15 @@
+2026-05-15 16:59:40,579 - INFO - Starting data ingestion process
+2026-05-15 16:59:43,553 - INFO - Performed train-test split on dataframe
+2026-05-15 16:59:43,555 - INFO - Exporting train and test datasets
+2026-05-15 16:59:43,886 - INFO - Train and test files saved successfully
+2026-05-15 16:59:43,902 - INFO - Starting data validation process
+2026-05-15 16:59:43,990 - INFO - Required columns: 50
+2026-05-15 16:59:43,990 - INFO - Dataframe columns: 50
+2026-05-15 16:59:43,990 - INFO - Required columns: 50
+2026-05-15 16:59:43,990 - INFO - Dataframe columns: 50
+2026-05-15 16:59:44,537 - INFO - Starting data transformation process
+2026-05-15 16:59:44,652 - INFO - Data transformation completed successfully
+2026-05-15 16:59:44,654 - INFO - Starting model trainer process
+2026-05-15 17:01:24,779 - INFO - Best model found: Gradient Boosting
+2026-05-15 17:01:24,895 - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts\\05_15_2026_16_59_40\\model_trainer\\trained_model\\model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.994896053778165, precision_score=0.9927950310559006, recall_score=0.9970059880239521), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9829145728643216, precision_score=0.9799599198396793, recall_score=0.9858870967741935))
+2026-05-15 17:01:24,897 - INFO - Model trainer completed successfully
