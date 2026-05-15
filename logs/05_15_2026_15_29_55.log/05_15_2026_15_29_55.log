@@ -1,0 +1,11 @@
+2026-05-15 15:29:57,978 - INFO - Starting data ingestion process
+2026-05-15 15:30:01,250 - INFO - Performed train-test split on dataframe
+2026-05-15 15:30:01,251 - INFO - Exporting train and test datasets
+2026-05-15 15:30:01,557 - INFO - Train and test files saved successfully
+2026-05-15 15:30:01,586 - INFO - Starting data validation process
+2026-05-15 15:30:01,667 - INFO - Required columns: 50
+2026-05-15 15:30:01,667 - INFO - Dataframe columns: 50
+2026-05-15 15:30:01,667 - INFO - Required columns: 50
+2026-05-15 15:30:01,667 - INFO - Dataframe columns: 50
+2026-05-15 15:30:02,152 - INFO - Starting data transformation process
+2026-05-15 15:30:02,254 - INFO - Data transformation completed successfully
