@@ -1,0 +1,4 @@
+2026-05-15 23:06:56,507 - INFO - Entered batch prediction pipeline
+2026-05-15 23:06:56,508 - INFO - Input file path: Network_Data\Phishing_Legitimate_full.csv
+2026-05-15 23:06:56,508 - INFO - Model file path: Artifacts\05_15_2026_22_48_00\model_trainer\trained_model\model.pkl
+2026-05-15 23:06:57,458 - INFO - Batch prediction file saved at: prediction_output\prediction_05_15_2026_23_06_57.csv

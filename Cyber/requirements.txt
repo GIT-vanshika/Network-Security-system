@@ -8,3 +8,5 @@ scikit-learn
 scipy
 pyyaml
 mlflow
+fastapi
+uvicorn
