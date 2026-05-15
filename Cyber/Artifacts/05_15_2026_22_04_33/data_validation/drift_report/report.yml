@@ -1,0 +1,166 @@
+AbnormalExtFormActionR:
+  drift_status: &id001 !!python/object/apply:numpy._core.multiarray.scalar
+  - !!python/object/apply:numpy.dtype
+    args:
+    - b1
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - '|'
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    AA==
+  p_value: 0.4691820458678814
+AbnormalFormAction:
+  drift_status: *id001
+  p_value: 0.9477629665709796
+AtSymbol:
+  drift_status: *id001
+  p_value: 1.0
+CLASS_LABEL:
+  drift_status: *id001
+  p_value: 0.9999885535352674
+DomainInPaths:
+  drift_status: *id001
+  p_value: 1.0
+DomainInSubdomains:
+  drift_status: *id001
+  p_value: 1.0
+DoubleSlashInPath:
+  drift_status: *id001
+  p_value: 1.0
+EmbeddedBrandName:
+  drift_status: *id001
+  p_value: 1.0
+ExtFavicon:
+  drift_status: *id001
+  p_value: 0.9348747411537229
+ExtFormAction:
+  drift_status: *id001
+  p_value: 0.995698770468471
+ExtMetaScriptLinkRT:
+  drift_status: *id001
+  p_value: 1.0
+FakeLinkInStatusBar:
+  drift_status: *id001
+  p_value: 1.0
+FrequentDomainNameMismatch:
+  drift_status: *id001
+  p_value: 1.0
+HostnameLength:
+  drift_status: *id001
+  p_value: 0.054383800678589014
+HttpsInHostname:
+  drift_status: *id001
+  p_value: 1.0
+IframeOrFrame:
+  drift_status: *id001
+  p_value: 1.0
+ImagesOnlyInForm:
+  drift_status: *id001
+  p_value: 1.0
+InsecureForms:
+  drift_status: *id001
+  p_value: 1.0
+IpAddress:
+  drift_status: *id001
+  p_value: 0.9999971632451665
+MissingTitle:
+  drift_status: *id001
+  p_value: 0.9992677741719815
+NoHttps:
+  drift_status: *id001
+  p_value: 1.0
+NumAmpersand:
+  drift_status: *id001
+  p_value: 0.9999953717141711
+NumDash:
+  drift_status: *id001
+  p_value: 0.999999998717466
+NumDashInHostname:
+  drift_status: *id001
+  p_value: 0.9999999999958527
+NumDots:
+  drift_status: *id001
+  p_value: 0.9302133949513669
+NumHash:
+  drift_status: *id001
+  p_value: 1.0
+NumNumericChars:
+  drift_status: *id001
+  p_value: 0.994103412619176
+NumPercent:
+  drift_status: *id001
+  p_value: 0.9999999999845831
+NumQueryComponents:
+  drift_status: *id001
+  p_value: 0.9998933544172014
+NumSensitiveWords:
+  drift_status: *id001
+  p_value: 0.9999999207079536
+NumUnderscore:
+  drift_status: *id001
+  p_value: 0.9999999999999578
+PathLength:
+  drift_status: *id001
+  p_value: 0.606244874851325
+PathLevel:
+  drift_status: *id001
+  p_value: 0.8741344283903589
+PctExtHyperlinks:
+  drift_status: *id001
+  p_value: 0.9436505639866184
+PctExtNullSelfRedirectHyperlinksRT:
+  drift_status: *id001
+  p_value: 0.9999997002507953
+PctExtResourceUrls:
+  drift_status: *id001
+  p_value: 0.548283776913667
+PctExtResourceUrlsRT:
+  drift_status: *id001
+  p_value: 0.9998540612950896
+PctNullSelfRedirectHyperlinks:
+  drift_status: *id001
+  p_value: 0.606244874851325
+PopUpWindow:
+  drift_status: *id001
+  p_value: 1.0
+QueryLength:
+  drift_status: *id001
+  p_value: 0.9999999999476644
+RandomString:
+  drift_status: *id001
+  p_value: 0.9999740680025078
+RelativeFormAction:
+  drift_status: *id001
+  p_value: 0.9042493084736836
+RightClickDisabled:
+  drift_status: *id001
+  p_value: 1.0
+SubdomainLevel:
+  drift_status: *id001
+  p_value: 0.92035205772542
+SubdomainLevelRT:
+  drift_status: *id001
+  p_value: 0.9999999999958527
+SubmitInfoToEmail:
+  drift_status: *id001
+  p_value: 1.0
+TildeSymbol:
+  drift_status: *id001
+  p_value: 1.0
+UrlLength:
+  drift_status: *id001
+  p_value: 0.39623690681247115
+UrlLengthRT:
+  drift_status: *id001
+  p_value: 0.9909240273480997
+id:
+  drift_status: *id001
+  p_value: 0.9393542129099094

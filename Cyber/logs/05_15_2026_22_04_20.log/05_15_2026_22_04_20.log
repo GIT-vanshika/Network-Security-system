@@ -1,0 +1,15 @@
+2026-05-15 22:04:33,336 - INFO - Starting data ingestion process
+2026-05-15 22:04:57,468 - INFO - Performed train-test split on dataframe
+2026-05-15 22:04:57,469 - INFO - Exporting train and test datasets
+2026-05-15 22:04:58,133 - INFO - Train and test files saved successfully
+2026-05-15 22:04:58,157 - INFO - Starting data validation process
+2026-05-15 22:04:58,552 - INFO - Required columns: 50
+2026-05-15 22:04:58,552 - INFO - Dataframe columns: 50
+2026-05-15 22:04:58,553 - INFO - Required columns: 50
+2026-05-15 22:04:58,553 - INFO - Dataframe columns: 50
+2026-05-15 22:04:59,714 - INFO - Starting data transformation process
+2026-05-15 22:04:59,986 - INFO - Data transformation completed successfully
+2026-05-15 22:04:59,992 - INFO - Starting model trainer process
+2026-05-15 22:08:43,556 - INFO - Best model found: Random Forest
+2026-05-15 22:10:12,645 - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts\\05_15_2026_22_04_33\\model_trainer\\trained_model\\model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=1.0, precision_score=1.0, recall_score=1.0), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9833080424886191, precision_score=0.9828109201213346, recall_score=0.9838056680161943))
+2026-05-15 22:10:12,667 - INFO - Model trainer completed successfully

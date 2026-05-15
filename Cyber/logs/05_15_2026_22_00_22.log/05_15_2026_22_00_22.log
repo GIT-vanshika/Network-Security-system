@@ -1,0 +1,13 @@
+2026-05-15 22:00:32,233 - INFO - Starting data ingestion process
+2026-05-15 22:00:46,107 - INFO - Performed train-test split on dataframe
+2026-05-15 22:00:46,109 - INFO - Exporting train and test datasets
+2026-05-15 22:00:46,673 - INFO - Train and test files saved successfully
+2026-05-15 22:00:46,743 - INFO - Starting data validation process
+2026-05-15 22:00:46,915 - INFO - Required columns: 50
+2026-05-15 22:00:46,915 - INFO - Dataframe columns: 50
+2026-05-15 22:00:46,915 - INFO - Required columns: 50
+2026-05-15 22:00:46,915 - INFO - Dataframe columns: 50
+2026-05-15 22:00:47,712 - INFO - Starting data transformation process
+2026-05-15 22:00:47,981 - INFO - Data transformation completed successfully
+2026-05-15 22:00:47,984 - INFO - Starting model trainer process
+2026-05-15 22:03:48,924 - INFO - Best model found: Random Forest
