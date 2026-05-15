@@ -1,9 +1,0 @@
-python-dotenv
-pandas
-numpy
-pymongo
-certifi
-dotenv
-scikit-learn
-scipy
-pyyaml

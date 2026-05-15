@@ -1,4 +1,0 @@
-2026-05-01 17:12:10,337 - INFO - Starting data ingestion process
-2026-05-01 17:12:13,391 - INFO - Performed train-test split on dataframe
-2026-05-01 17:12:13,391 - INFO - Exporting train and test datasets
-2026-05-01 17:12:13,692 - INFO - Train and test files saved successfully

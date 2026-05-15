@@ -1,7 +1,0 @@
-2026-05-06 15:36:11,202 - INFO - Starting data ingestion process
-2026-05-06 15:36:17,642 - INFO - Performed train-test split on dataframe
-2026-05-06 15:36:17,644 - INFO - Exporting train and test datasets
-2026-05-06 15:36:17,964 - INFO - Train and test files saved successfully
-2026-05-06 15:36:17,976 - INFO - Starting data validation process
-2026-05-06 15:36:18,063 - INFO - Required columns: 31
-2026-05-06 15:36:18,064 - INFO - Dataframe columns: 50
