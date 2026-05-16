@@ -1,53 +1,409 @@
 # Network Security ML Pipeline
 
-This project is an end-to-end network security machine learning system for identifying phishing URLs from structured URL-based features. It is designed to handle the complete ML lifecycle, starting from raw data collection and database storage, then moving through data ingestion, validation, transformation, model training, evaluation, prediction, and deployment.
+Production-grade machine learning system for phishing detection in network security. This project implements an end-to-end ML pipeline with data ingestion, validation, transformation, model training, and batch prediction capabilities.
 
-## About The Project
+## Overview
 
-The system uses phishing and legitimate website data to learn patterns that help classify whether a URL is safe or suspicious. The project is structured as a production-style ML pipeline, where each stage is separated into components, configuration entities, artifact entities, logging, exception handling, and reusable utilities.
+The Network Security ML Pipeline is designed to identify malicious URLs using machine learning. It processes network data to classify URLs as either phishing threats or legitimate websites. The system handles the complete ML lifecycle including data collection, validation, preprocessing, model training, and prediction serving through a REST API.
 
-In short, the project aims to make a reliable phishing detection workflow that can collect data, validate data quality, train a machine learning model, and later serve predictions through a deployment-ready pipeline.
+## Key Features
 
-## Current Features
+- **Data Management**: Automated data ingestion from MongoDB with feature store management
+- **Data Validation**: Schema validation, numerical checks, and drift detection using Kolmogorov-Smirnov test
+- **Data Transformation**: KNN-based imputation and preprocessing pipeline
+- **Model Training**: Support for multiple ML algorithms with cross-validation
+- **REST API**: FastAPI-based endpoint for real-time predictions and batch processing
+- **Containerization**: Docker and Docker Compose for development and production deployment
+- **CI/CD Integration**: GitHub Actions workflow for automated testing and deployment
+- **Logging & Monitoring**: Comprehensive logging and MLflow experiment tracking
+- **Testing**: Pytest-based test suite with coverage reporting
 
-- Upload raw CSV data into MongoDB using `push_data.py`.
-- Ingest data from MongoDB into the local feature store.
-- Split ingested data into train and test datasets.
-- Validate train/test files against the configured schema in `networksecurity/data_schema/schema.yml`.
-- Check for numerical column availability.
-- Detect dataset drift between train and test data using the Kolmogorov-Smirnov test.
-- Save pipeline artifacts under the `Artifacts/` directory.
-- Log pipeline execution under the `logs/` directory.
+## Project Status
 
-## Project Progress
+| Component | Status | Details |
+|-----------|--------|---------|
+| Data Ingestion | Complete | MongoDB integration with feature store |
+| Data Validation | Complete | Schema validation and drift detection |
+| Data Transformation | Complete | KNN imputation and preprocessing |
+| Model Training | Complete | Multiple algorithm support with evaluation |
+| Prediction Pipeline | Complete | Batch and real-time prediction endpoints |
+| FastAPI Server | Complete | REST API with interactive documentation |
+| Docker Setup | Complete | Development and production configurations |
+| CI/CD Pipeline | Complete | GitHub Actions workflows |
+| Code Quality | Complete | Linting and formatting enforced |
 
-| Stage | Status | Notes |
-| --- | --- | --- |
-| Project structure | Completed | Modular package layout is available under `networksecurity/`. |
-| Data source setup | Completed | Source CSV and MongoDB upload script are available. |
-| Data ingestion | Completed | Data is extracted from MongoDB, saved to feature store, and split into train/test files. |
-| Data validation | Completed | Schema validation, numerical column checks, and drift report generation are implemented. |
-| Model training | Pending | Training component is not implemented yet. |
-| Model evaluation | Pending | Evaluation metrics and model selection are not implemented yet. |
-| Prediction pipeline | Pending | Inference workflow is not implemented yet. |
-| Deployment | Pending | Dockerfile exists but deployment setup is not completed. |
+## Technology Stack
 
-## Repository Structure
+- Python 3.10
+- FastAPI - REST API framework
+- MongoDB - Database management
+- Scikit-learn - Machine learning algorithms
+- Pandas - Data manipulation and analysis
+- NumPy - Numerical computing
+- PyYAML - Configuration management
+- MLflow - Experiment tracking
+- Docker - Containerization
+- GitHub Actions - CI/CD automation
 
-```text
-networksecurity/
-  components/          # Pipeline components such as ingestion and validation
-  constants/           # Pipeline constants
-  data_schema/         # Dataset schema definition
-  entity/              # Config and artifact entities
-  exception/           # Custom exception handling
-  logging/             # Logging setup
-  pipeline/            # Pipeline package placeholder
-  utils/               # YAML and utility helpers
+## Project Structure
 
-Network_Data/          # Source dataset
-Artifacts/             # Generated pipeline artifacts
-logs/                  # Runtime logs
+```
+Cyber/
+├── .github/
+│   └── workflows/              # GitHub Actions CI/CD
+│       ├── ci-cd.yml           # Build, test, push to registry
+│       └── deploy.yml          # Production deployment
+│
+├── networksecurity/            # Main package
+│   ├── components/             # Pipeline components
+│   │   ├── data_ingestion.py
+│   │   ├── data_validation.py
+│   │   ├── data_tranformation.py
+│   │   └── model_trainer.py
+│   ├── constants/              # Configuration constants
+│   ├── entity/                 # Data classes
+│   ├── exception/              # Custom exceptions
+│   ├── logging/                # Logging setup
+│   ├── pipeline/               # Pipeline orchestration
+│   ├── utils/                  # Helper utilities
+│   └── data_schema/            # YAML schema
+│
+├── Network_Data/               # Training datasets
+├── Artifacts/                  # Pipeline outputs
+├── logs/                       # Application logs
+├── mlruns/                     # MLflow tracking
+├── prediction_output/          # Prediction results
+│
+├── app.py                      # FastAPI application
+├── main.py                     # Training pipeline entry
+├── Dockerfile                  # Development image
+├── Dockerfile.prod             # Production image
+├── docker-compose.yml          # Local environment
+├── docker-compose.prod.yml     # Production environment
+├── Makefile                    # Development commands
+├── requirements.txt            # Python dependencies
+├── setup.py                    # Package configuration
+├── pytest.ini                  # Test configuration
+└── README.md                   # This file
+```
+
+## Prerequisites
+
+- Python 3.10 or higher
+- Docker and Docker Compose (for containerized deployment)
+- MongoDB (included in Docker Compose)
+- Git
+
+## Installation
+
+### Option 1: Local Development Setup
+
+Clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd Cyber_security_ML/Cyber
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+pip install -e .
+```
+
+### Option 2: Docker Deployment
+
+```bash
+cd Cyber_security_ML/Cyber
+
+# Development environment
+docker-compose up -d
+
+# Production environment
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+## Quick Start
+
+### 1. Start Services
+
+```bash
+# Using Docker Compose
+docker-compose up -d
+
+# Or using Make
+make docker-compose-up
+```
+
+### 2. Upload Training Data
+
+```bash
+python push_data.py
+```
+
+### 3. Run Training Pipeline
+
+```bash
+python main.py
+
+# Or using Make
+make run
+```
+
+### 4. Access API
+
+- Interactive API Documentation: http://localhost:8000/docs
+- Alternative Documentation: http://localhost:8000/redoc
+- Health Check: http://localhost:8000/
+
+## Usage
+
+### Training Pipeline
+
+Execute the complete training pipeline:
+
+```bash
+python main.py
+```
+
+This will:
+1. Ingest data from MongoDB
+2. Validate data against schema
+3. Transform and preprocess data
+4. Train machine learning models
+5. Evaluate and select best model
+6. Save artifacts and logs
+
+### REST API Endpoints
+
+#### Health Check
+```bash
+curl http://localhost:8000/
+```
+
+#### Batch Prediction
+```bash
+curl -X POST http://localhost:8000/predict/batch \
+  -F "input_file_path=Network_Data/Phishing_Legitimate_full.csv"
+```
+
+#### Interactive Documentation
+Open http://localhost:8000/docs in your browser for Swagger UI with try-it-out capabilities.
+
+### Development Commands
+
+Available Make commands:
+
+```bash
+make help              # Show all commands
+make install           # Install production dependencies
+make install-dev       # Install development dependencies
+make test              # Run tests with coverage
+make lint              # Run linting checks
+make format            # Format code
+make build             # Build package
+make run               # Run FastAPI server locally
+make docker-build      # Build Docker image
+make docker-compose-up # Start Docker Compose services
+make docker-compose-down # Stop Docker Compose services
+make ci-local          # Run local CI pipeline (lint -> test)
+```
+
+## Configuration
+
+### Environment Variables
+
+Create a `.env` file from the template:
+
+```bash
+cp .env.example .env
+```
+
+Key environment variables:
+
+```
+MONGO_DB_URL=mongodb://admin:admin123@mongo:27017
+PYTHONUNBUFFERED=1
+APP_HOST=0.0.0.0
+APP_PORT=8000
+```
+
+### Data Schema
+
+Define dataset structure in `networksecurity/data_schema/schema.yml`:
+
+```yaml
+column_name:
+  required: true
+  type: numeric
+  min: 0
+  max: 1
+```
+
+### Pipeline Constants
+
+Configure pipeline behavior in `networksecurity/constants/training_pipeline/__init__.py`:
+
+```python
+TARGET_COLUMN = "CLASS_LABEL"
+DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO = 0.2
+MODEL_TRAINER_EXPECTED_SCORE = 0.6
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+# All tests with coverage
+make test
+
+# Specific test file
+pytest tests/test_data_ingestion.py -v
+
+# With coverage report
+pytest --cov=networksecurity --cov-report=html
+```
+
+View HTML coverage report:
+```bash
+open htmlcov/index.html
+```
+
+## Code Quality
+
+### Linting
+
+```bash
+make lint
+```
+
+Checks code style against PEP 8 with flake8.
+
+### Formatting
+
+```bash
+make format
+```
+
+Automatically formats code with Black and sorts imports with isort.
+
+### Type Checking
+
+```bash
+mypy networksecurity --ignore-missing-imports
+```
+
+## Continuous Integration
+
+GitHub Actions automatically runs on every push:
+
+1. Code linting with flake8
+2. Test suite with pytest and coverage
+3. Docker image build
+4. Push to GitHub Container Registry
+
+View workflows in `.github/workflows/`:
+- `ci-cd.yml` - Build and test pipeline
+- `deploy.yml` - Production deployment
+
+## Docker Deployment
+
+### Development
+
+```bash
+docker-compose up -d
+
+# Services available:
+# - API: http://localhost:8000
+# - MongoDB: localhost:27017
+# - MongoDB Express: http://localhost:8081
+```
+
+### Production
+
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+Production configuration includes:
+- Multi-stage Docker build for optimized image size
+- Resource limits and reservations
+- Health checks
+- Auto-restart policies
+
+See `DOCKER_GUIDE.md` for detailed Docker documentation.
+
+## Troubleshooting
+
+### MongoDB Connection Error
+
+Ensure MongoDB service is running:
+```bash
+docker-compose ps mongo
+docker-compose logs mongo
+```
+
+### Port Already in Use
+
+Change port in `docker-compose.yml`:
+```yaml
+ports:
+  - "8001:8000"  # Map to different port
+```
+
+### Missing Dependencies
+
+Reinstall dependencies:
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+
+## Performance Metrics
+
+The system tracks performance using:
+
+- Coverage Reports: `htmlcov/index.html`
+- MLflow Experiments: http://localhost:5000 (when running)
+- Application Logs: `logs/` directory
+- Artifacts: `Artifacts/` directory with timestamped outputs
+
+## Security Considerations
+
+- Environment variables for sensitive configuration
+- MongoDB authentication enabled by default
+- Non-root Docker user in production
+- Health checks for service readiness
+- Proper exception handling and logging
+
+## Development Workflow
+
+1. Create feature branch
+2. Make changes and run local tests: `make ci-local`
+3. Commit and push to trigger CI/CD
+4. GitHub Actions runs full test suite
+5. Merge after successful CI/CD
+
+## License
+
+This project is proprietary and confidential.
+
+## Support
+
+For issues, questions, or contributions, please contact the development team.
+
+## Changelog
+
+### Version 1.0.0 (May 2026)
+- Complete ML pipeline implementation
+- FastAPI REST endpoints
+- Docker containerization
+- GitHub Actions CI/CD
+- Full test coverage
+- PEP 8 code compliance
 main.py                # Runs ingestion and validation pipeline
 push_data.py           # Pushes CSV records into MongoDB
 requirements.txt       # Python dependencies

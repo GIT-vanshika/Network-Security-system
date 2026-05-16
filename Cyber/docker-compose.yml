@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # FastAPI Application Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: network_security_app
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MONGO_DB_URL=mongodb://mongo:27017
+    depends_on:
+      - mongo
+    volumes:
+      - ./logs:/app/logs
+      - ./prediction_output:/app/prediction_output
+      - ./uploads:/app/uploads
+      - ./Artifacts:/app/Artifacts
+    networks:
+      - security_network
+    restart: unless-stopped
+
+  # MongoDB Service
+  mongo:
+    image: mongo:6.0
+    container_name: network_security_mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - security_network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    restart: unless-stopped
+
+  # MongoDB Express (optional - for viewing MongoDB data)
+  mongo-express:
+    image: mongo-express:1.0.0
+    container_name: network_security_mongo_express
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin123
+      - ME_CONFIG_MONGODB_URL=mongodb://admin:admin123@mongo:27017/
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo
+    networks:
+      - security_network
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
+
+networks:
+  security_network:
+    driver: bridge

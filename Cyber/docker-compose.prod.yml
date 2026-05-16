@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: network_security_app_prod
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MONGO_DB_URL=mongodb://admin:admin123@mongo:27017
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+      - ./prediction_output:/app/prediction_output
+      - ./Artifacts:/app/Artifacts
+    networks:
+      - security_network
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+  mongo:
+    image: mongo:6.0
+    container_name: network_security_mongo_prod
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data_prod:/data/db
+    networks:
+      - security_network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+volumes:
+  mongo_data_prod:
+
+networks:
+  security_network:
+    driver: bridge

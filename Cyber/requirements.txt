@@ -12,3 +12,13 @@ fastapi
 uvicorn
 dagshub
 python-multipart
+
+# Development dependencies for testing, linting, and formatting
+pytest
+pytest-cov
+pytest-asyncio
+flake8
+black
+isort
+mypy
+requests

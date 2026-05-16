@@ -75,6 +75,7 @@ class DataIngestionConfig:
             training_pipeline.DATA_INGESTION_DATABASE_NAME
         )
 
+
 class DataValidationConfig:
     def __init__(self, training_pipeline_config: TrainingPipelineConfig):
 
