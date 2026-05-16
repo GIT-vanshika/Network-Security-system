@@ -10,3 +10,5 @@ pyyaml
 mlflow
 fastapi
 uvicorn
+dagshub
+python-multipart

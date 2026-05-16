@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security Predictions</title>
+    <style>
+        :root {
+            --bg: #07110f;
+            --panel: #0c1b18;
+            --panel-soft: #102823;
+            --line: #1f4d43;
+            --text: #e8fff8;
+            --muted: #8fb8ac;
+            --accent: #32f5b4;
+            --accent-2: #36a3ff;
+            --danger: #ff5c7a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(50, 245, 180, 0.14), transparent 32rem),
+                linear-gradient(135deg, #06100e 0%, #071513 50%, #08111a 100%);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .page {
+            width: min(1280px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 32px 0;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: clamp(1.7rem, 3vw, 2.8rem);
+            letter-spacing: 0;
+        }
+
+        .brand span {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 0 14px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            color: var(--text);
+            background: rgba(12, 27, 24, 0.86);
+            text-decoration: none;
+            font-size: 0.92rem;
+        }
+
+        .button.primary {
+            border-color: rgba(50, 245, 180, 0.65);
+            color: #03120e;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            font-weight: 700;
+        }
+
+        .status {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .metric {
+            min-width: 0;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(12, 27, 24, 0.8);
+            padding: 14px;
+        }
+
+        .metric strong {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--accent);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+        }
+
+        .metric span {
+            display: block;
+            overflow-wrap: anywhere;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .table-wrap {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(7, 17, 15, 0.92);
+            overflow: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        .empty {
+            padding: 34px;
+            border: 1px dashed var(--line);
+            border-radius: 8px;
+            color: var(--muted);
+            background: rgba(12, 27, 24, 0.68);
+        }
+
+        .cyber-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+            font-size: 0.86rem;
+        }
+
+        .cyber-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--line);
+            color: #03120e;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .cyber-table tbody td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(31, 77, 67, 0.55);
+            color: #d9fff4;
+            white-space: nowrap;
+        }
+
+        .cyber-table tbody tr:nth-child(even) {
+            background: rgba(16, 40, 35, 0.7);
+        }
+
+        .cyber-table tbody tr:hover {
+            background: rgba(50, 245, 180, 0.1);
+        }
+
+        @media (max-width: 760px) {
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .actions {
+                justify-content: flex-start;
+            }
+
+            .status {
+                grid-template-columns: 1fr;
+            }
+
+            .page {
+                width: min(100% - 20px, 1280px);
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="topbar">
+            <div class="brand">
+                <h1>Network Security Predictions</h1>
+                <span>Phishing URL classification results</span>
+            </div>
+            <nav class="actions" aria-label="Page actions">
+                <a class="button primary" href="/predict-ui">Run Default Prediction</a>
+                <a class="button" href="/prediction-output">Latest Output</a>
+                <a class="button" href="/docs">API Docs</a>
+            </nav>
+        </header>
+
+        <section class="status" aria-label="Prediction status">
+            <div class="metric">
+                <strong>Status</strong>
+                <span>{{ message }}</span>
+            </div>
+            <div class="metric">
+                <strong>Input</strong>
+                <span>{{ input_file_path or "Not selected" }}</span>
+            </div>
+            <div class="metric">
+                <strong>Output</strong>
+                <span>{{ prediction_file_path }}</span>
+            </div>
+        </section>
+
+        {% if table %}
+            <section class="table-wrap" aria-label="Prediction table">
+                {{ table | safe }}
+            </section>
+        {% else %}
+            <section class="empty">
+                No prediction table is available yet.
+            </section>
+        {% endif %}
+    </main>
+</body>
+</html>

@@ -1,2 +1,5 @@
-venv
-.env
+Artifacts/
+logs/
+prediction_output/
+uploads/
+venv/

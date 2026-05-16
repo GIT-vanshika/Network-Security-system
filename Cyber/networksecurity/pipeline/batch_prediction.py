@@ -13,6 +13,7 @@ from networksecurity.utils.main_utils import load_object
 
 PREDICTION_COLUMN = "prediction"
 DEFAULT_OUTPUT_DIR = "prediction_output"
+DEFAULT_OUTPUT_FILE_NAME = "output.csv"
 
 
 class BatchPrediction:
@@ -21,11 +22,13 @@ class BatchPrediction:
         input_file_path: str,
         model_file_path: str = None,
         output_dir: str = DEFAULT_OUTPUT_DIR,
+        output_file_path: str = None,
     ):
         try:
             self.input_file_path = input_file_path
             self.model_file_path = model_file_path or self.get_latest_model_path()
             self.output_dir = output_dir
+            self.output_file_path = output_file_path
         except Exception as e:
             raise NetworkSecurityException(e, sys)
 
@@ -64,13 +67,19 @@ class BatchPrediction:
 
     def save_prediction_file(self, dataframe: pd.DataFrame) -> str:
         try:
-            os.makedirs(self.output_dir, exist_ok=True)
+            if self.output_file_path:
+                output_file_path = self.output_file_path
+                output_dir = os.path.dirname(output_file_path)
+                if output_dir:
+                    os.makedirs(output_dir, exist_ok=True)
+            else:
+                os.makedirs(self.output_dir, exist_ok=True)
 
-            timestamp = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
-            output_file_path = os.path.join(
-                self.output_dir,
-                f"prediction_{timestamp}.csv",
-            )
+                timestamp = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
+                output_file_path = os.path.join(
+                    self.output_dir,
+                    f"prediction_{timestamp}.csv",
+                )
 
             dataframe.to_csv(output_file_path, index=False, header=True)
             return output_file_path
@@ -120,6 +129,14 @@ def parse_args():
         default=DEFAULT_OUTPUT_DIR,
         help="Directory where the prediction CSV will be saved.",
     )
+    parser.add_argument(
+        "--output-file",
+        default=None,
+        help=(
+            "Exact prediction CSV path. If provided, this overrides "
+            "--output-dir and writes to the given file."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -130,6 +147,7 @@ if __name__ == "__main__":
         input_file_path=args.input_file,
         model_file_path=args.model_file,
         output_dir=args.output_dir,
+        output_file_path=args.output_file,
     )
     prediction_file_path = batch_prediction.predict()
 
