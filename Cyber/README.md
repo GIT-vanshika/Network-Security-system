@@ -446,12 +446,3 @@ python main.py
 ```
 
 The pipeline writes generated files into a timestamped folder under `Artifacts/`.
-
-## Next Steps
-
-- Add data transformation and preprocessing.
-- Implement model training for phishing URL classification.
-- Add model evaluation and metric tracking.
-- Build a prediction pipeline.
-- Complete Docker and deployment configuration.
-- Add automated tests for ingestion and validation components.
